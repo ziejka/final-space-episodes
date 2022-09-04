@@ -1,27 +1,26 @@
-# Next.js + Tailwind CSS Example
+# Final space API usage
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+## Description
+I have chosen Next.js as a framework of choice. It allows me of rapid iteration and
+out of the box backend integration and tailwind as the fastest way of styling that kind of app. 
 
-## Deploy your own
+As I've expected multiple call to external API I've implemented simple in-memory cache using `memory-cache` library.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+When users enters the page, it's get server rendered response with information about Loading episodes, this can be improved
+by better components' segregation. 
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+Using `useEffect` depended on the `page` we allow to fetch next pages. As improvement, we could add paramURL to the homepage
+with `page` itself.
 
-## How to use
+What I didn't have time for: 
+- add test to the application
+- better error handling on both backend and fronted
+- limiting backend call's for fetching images as now each render of `CharacterImage` makes a call to the backend,
+  having Map of `[characterID, imgURL]` and storing already fetch url would be one of possible simple solution
+- creating storybook would be worth considering not to be depended on of the data fetch while styling the components 
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+## Scripts
 
 ```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
+yarn dev
 ```
-
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
