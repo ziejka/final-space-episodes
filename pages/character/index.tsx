@@ -1,7 +1,7 @@
 import type {NextPage} from 'next'
 import {useCallback, useEffect, useState} from 'react';
-import {EpisodeType} from '../domain/FinalSpace';
-import {Episode} from '../components/Episode/Episode';
+import {EpisodeType} from '../../domain/FinalSpace';
+import {Episode} from '../../components/Episode/Episode';
 
 const perPage = 10
 const Home: NextPage = () => {
@@ -30,10 +30,14 @@ const Home: NextPage = () => {
     }
   }, [])
 
-  const getPagination = useCallback((numberOfEpisodes: number) => {
-    const numberOfPages = Math.ceil(numberOfEpisodes / perPage)
-    return new Array(numberOfPages).fill(undefined)
-  }, [])
+  const getPagination = (numberOfEpisodes: number) => {
+    let pagination = [], index = 0
+    while (index * perPage < numberOfEpisodes) {
+      pagination.push(index)
+      index++
+    }
+    return pagination
+  }
 
   useEffect(() => {
     fetchEpisodes(page)
@@ -50,10 +54,10 @@ const Home: NextPage = () => {
       <h1 className="uppercase mb-3 text-center text-3xl font-bold" >Final Space episodes</h1 >
       {episodes?.map(e => <Episode episode={e} />)}
       <div className="space-x-2 mt-5 flex flex-row justify-end" >
-        {pagination.map((_, i) => <button key={i}
+        {pagination.map(p => <button key={p}
                                      className={`rounded border bg-amber-200 px-3 py-1 hover:bg-amber-400 
-                                     ${page === i && 'bg-amber-600'}`}
-                                     onClick={() => setPage(i)} >{i + 1}</button >)}
+                                                ${page === p && 'bg-amber-600'}`}
+                                     onClick={() => setPage(p)} >{p + 1}</button >)}
       </div >
     </div >
   )

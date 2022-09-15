@@ -7,3 +7,13 @@ export type EpisodeType = {
   characters: string[],
   img_url: string
 }
+
+export type CharacterType = {
+  id: number
+  name: string
+  status: string
+  species: string
+  gender: string
+  hair: string
+  img_url: string
+}
